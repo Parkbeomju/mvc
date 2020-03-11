@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <Resource name="" auth="Container" type="javax.sql.DataSource"
+              maxActive="10" maxIdle="3" maxWait="10000" username="felkmqwt"
+              password="PFz09wbu8QuuZvQk5yuNdC2qwj82XXAS" driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://arjuna.db.elephantsql.com:5432"
+              closeMethod="close"/>
+</Context>
