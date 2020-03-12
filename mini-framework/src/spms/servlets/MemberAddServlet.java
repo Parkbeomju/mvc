@@ -1,9 +1,8 @@
 package spms.servlets;
 
-import spms.dao.MemberDao;
+import spms.dao.PostgreSqlMemberDao;
 import spms.vo.Member;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +31,10 @@ public class MemberAddServlet extends HttpServlet {
 
     try {
       ServletContext sc = this.getServletContext();
-      MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
+      PostgreSqlMemberDao postgreSqlMemberDao = (PostgreSqlMemberDao)sc.getAttribute("memberDao");
 
       Member member = (Member)request.getAttribute("member");
-      memberDao.insert(member);
+      postgreSqlMemberDao.insert(member);
 
       request.setAttribute("viewUrl", "redirect:list.do");
 //      MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");

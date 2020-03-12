@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import spms.dao.MemberDao;
+import spms.dao.PostgreSqlMemberDao;
 import spms.vo.Member;
 
 // 프런트 컨트롤러 적용
@@ -31,8 +31,8 @@ public class LogInServlet extends HttpServlet {
       throws ServletException, IOException {
     try {
       ServletContext sc = this.getServletContext();
-      MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
-      Member member = memberDao.exist(
+      PostgreSqlMemberDao postgreSqlMemberDao = (PostgreSqlMemberDao)sc.getAttribute("memberDao");
+      Member member = postgreSqlMemberDao.exist(
           request.getParameter("email"),
           request.getParameter("password"));
       if (member != null) {

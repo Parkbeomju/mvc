@@ -1,8 +1,7 @@
 package spms.servlets;
 
-import spms.dao.MemberDao;
+import spms.dao.PostgreSqlMemberDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +21,9 @@ public class MemberDeleteServlet extends HttpServlet {
 
 		try {
 			ServletContext sc = this.getServletContext();
-			MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
+			PostgreSqlMemberDao postgreSqlMemberDao = (PostgreSqlMemberDao)sc.getAttribute("memberDao");
 
-			memberDao.delete(Integer.parseInt(request.getParameter("no")));
+			postgreSqlMemberDao.delete(Integer.parseInt(request.getParameter("no")));
 			request.setAttribute("viewUrl", "redirect:list.do");
 			
 		} catch (Exception e) {

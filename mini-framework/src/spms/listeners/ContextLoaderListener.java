@@ -1,6 +1,9 @@
 package spms.listeners;
 
+import spms.context.ApplicationContext;
+import spms.controls.*;
 import spms.dao.MemberDao;
+import spms.dao.PostgreSqlMemberDao;
 
 import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
@@ -17,40 +20,63 @@ public class ContextLoaderListener implements ServletContextListener {
 //  DBConnectionPool connPool;
 //  BasicDataSource ds;
 
+  static ApplicationContext applicationContext;
+
+  public static ApplicationContext getApplicationContext() {
+    return applicationContext;
+  }
+
   @Override
   public void contextInitialized(ServletContextEvent event) {
     try {
       ServletContext sc = event.getServletContext();
 
-//      Class.forName(sc.getInitParameter("driver"));
-//      conn = DriverManager.getConnection(
-//          sc.getInitParameter("url"),
-//          sc.getInitParameter("username"),
-//          sc.getInitParameter("password"));
+      String propertiesPath = sc.getRealPath(
+          sc.getInitParameter("contextConfigLocation"));
+      applicationContext = new ApplicationContext(propertiesPath);
 
-//      connPool = new DBConnectionPool(
-//          sc.getInitParameter("driver"),
-//          sc.getInitParameter("url"),
-//          sc.getInitParameter("username"),
-//          sc.getInitParameter("password"));
+      /*
+      Class.forName(sc.getInitParameter("driver"));
+      conn = DriverManager.getConnection(
+          sc.getInitParameter("url"),
+          sc.getInitParameter("username"),
+          sc.getInitParameter("password"));
 
-//      ds = new BasicDataSource();
-//      ds.setDriverClassName(sc.getInitParameter("driver"));
-//      ds.setUrl(sc.getInitParameter("url"));
-//      ds.setUsername(sc.getInitParameter("username"));
-//      ds.setPassword(sc.getInitParameter("password"));
+      connPool = new DBConnectionPool(
+          sc.getInitParameter("driver"),
+          sc.getInitParameter("url"),
+          sc.getInitParameter("username"),
+          sc.getInitParameter("password"));
+
+      ds = new BasicDataSource();
+      ds.setDriverClassName(sc.getInitParameter("driver"));
+      ds.setUrl(sc.getInitParameter("url"));
+      ds.setUsername(sc.getInitParameter("username"));
+      ds.setPassword(sc.getInitParameter("password"));
 
       InitialContext initialContext = new InitialContext();
       DataSource ds = (DataSource)initialContext.lookup(
-          "java:comp/env/jdbc/postgresql"
-      );
+          "java:comp/env/jdbc/postgresql");
 
-      MemberDao memberDao = new MemberDao();
-//      memberDao.setConnection(conn);
-//      memberDao.setDbConnectionPool(connPool);
+      PostgreSqlMemberDao memberDao = new PostgreSqlMemberDao();
       memberDao.setDataSource(ds);
+      memberDao.setConnection(conn);
+      memberDao.setDbConnectionPool(connPool);
 
-      sc.setAttribute("memberDao", memberDao);
+
+     sc.setAttribute("memberDao", memberDao);  //별도로 꺼내서 사용할 일이 없기 때문에 ServletContext에 저장안함
+      sc.setAttribute("/auth/login.do",
+          new LogInController().setMemberDao(memberDao));
+      sc.setAttribute("/auth/logout.do", new LogOutController());
+      sc.setAttribute("/member/list.do",
+          new MemberListController().setMemberDao(memberDao));
+      sc.setAttribute("/member/add.do",
+          new MemberAddController().setMemberDao(memberDao));
+      sc.setAttribute("/member/update.do",
+          new MemberUpdateController().setMemberDao(memberDao));
+      sc.setAttribute("/member/delete.do",
+          new MemberDeleteController().setMemberDao(memberDao));
+          */
     } catch (Throwable e) {
       e.printStackTrace();
     }
