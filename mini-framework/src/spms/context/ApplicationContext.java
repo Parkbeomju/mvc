@@ -1,20 +1,19 @@
 package spms.context;
 
-import java.lang.reflect.Method;
-import java.util.Hashtable;
-import java.io.FileReader;
-import java.util.Properties;
-import java.util.Set;
+import org.reflections.Reflections;
+import spms.annotaiton.Component;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import java.io.FileReader;
+import java.lang.reflect.Method;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Set;
 
-
-import spms.annotaiton.Component;
-
-// 프로퍼티 파일 및 애노테이션을 이용한 객체 준비
 public class ApplicationContext {
-  Hashtable<String, Object> objTable = new Hashtable<String, Object>();
+
+  Hashtable<String, Object> objTable = new Hashtable<>();
 
   public Object getBean(String key) {
     return objTable.get(key);
@@ -24,30 +23,29 @@ public class ApplicationContext {
     Properties props = new Properties();
     props.load(new FileReader(propertiesPath));
 
-    prepareObjects(props);
+    prepareObject(props);
     prepareAnnotationObjects();
     injectDependency();
   }
 
-  private void prepareAnnotationObjects()
-      throws Exception {
+  private void prepareAnnotationObjects() throws Exception {
     Reflections reflector = new Reflections("");
 
     Set<Class<?>> list = reflector.getTypesAnnotatedWith(Component.class);
-    String key = null;
+    String key;
     for (Class<?> clazz : list) {
       key = clazz.getAnnotation(Component.class).value();
       objTable.put(key, clazz.newInstance());
     }
   }
 
-  private void prepareObjects(Properties props) throws Exception {
+  private void prepareObject(Properties props) throws Exception {
     Context ctx = new InitialContext();
-    String key = null;
-    String value = null;
+    String key;
+    String value;
 
     for (Object item : props.keySet()) {
-      key = (String) item;
+      key = (String)item;
       value = props.getProperty(key);
       if (key.startsWith("jndi.")) {
         objTable.put(key, ctx.lookup(value));
@@ -66,7 +64,7 @@ public class ApplicationContext {
   }
 
   private void callSetter(Object obj) throws Exception {
-    Object dependency = null;
+    Object dependency;
     for (Method m : obj.getClass().getMethods()) {
       if (m.getName().startsWith("set")) {
         dependency = findObjectByType(m.getParameterTypes()[0]);
@@ -85,4 +83,5 @@ public class ApplicationContext {
     }
     return null;
   }
+
 }
