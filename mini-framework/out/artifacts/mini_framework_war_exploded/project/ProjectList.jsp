@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>프로젝트목록</title>
+    <meta charset="UTF-8">
+    <title>프로젝트 목록</title>
 </head>
 <body>
 <jsp:include page="/Header2.jsp"/>
@@ -18,10 +18,10 @@
         <th>상태</th>
         <th></th>
     </tr>
-    <c:forEach var="project" items="#{projects}">
+    <c:forEach var="project" items="${projects}">
         <tr>
             <td>${project.no}</td>
-            <td><a href='update.do?no=${project.no}'>${project.title}</a></td>
+            <td><a href="update.do?no=${project.no}">${project.title}</a></td>
             <td>${project.startDate}</td>
             <td>${project.endDate}</td>
             <td>${project.state}</td>

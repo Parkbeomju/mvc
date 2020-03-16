@@ -2,6 +2,8 @@ package spms.controls;
 
 import spms.annotaiton.Component;
 import spms.bind.DataBinding;
+import spms.dao.MemberDao;
+import spms.dao.PostgreSqlMemberDao;
 import spms.dao.ProjectDao;
 import spms.vo.Project;
 
