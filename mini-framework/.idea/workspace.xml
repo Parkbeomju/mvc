@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="493113a0-ad01-42b3-9eec-270e3ce01bbc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/spms/controls/ProjectAddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/spms/controls/ProjectAddController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/project/ProjectList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/project/ProjectList.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="493113a0-ad01-42b3-9eec-270e3ce01bbc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +177,7 @@
       <workItem from="1584079221735" duration="2274000" />
       <workItem from="1584081740696" duration="2119000" />
       <workItem from="1584086950326" duration="4000" />
-      <workItem from="1584174195760" duration="11731000" />
+      <workItem from="1584174195760" duration="12154000" />
     </task>
     <servers />
   </component>
