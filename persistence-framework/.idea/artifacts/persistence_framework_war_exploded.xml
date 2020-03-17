@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="persistence-framework:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/persistence_framework_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="persistence-framework/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="persistence-framework" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
